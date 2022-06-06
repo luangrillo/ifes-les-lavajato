@@ -1,14 +1,12 @@
 package com.lavajato.spring.api.controllers;
 
-
-
 import java.util.Collection;
 
 import javax.validation.Valid;
 
-import com.lavajato.spring.api.entity.Pedido;
+import com.lavajato.spring.api.entity.Checklist;
 import com.lavajato.spring.api.repository.exeptions.ConstraintException;
-import com.lavajato.spring.api.security.services.PedidoService;
+import com.lavajato.spring.api.security.services.ChecklistService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,46 +19,45 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value = "/pedido")
-public class PedidoController {
+@RequestMapping(value = "/checklist")
+public class ChecklistController {
 
     @Autowired
-    private PedidoService pedido;
+    private ChecklistService checklist;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Collection<Pedido>> findAll() {
-        Collection<Pedido> collection = pedido.findAll();
+    public ResponseEntity<Collection<Checklist>> findAll() {
+        Collection<Checklist> collection = checklist.findAll();
         return ResponseEntity.ok().body(collection);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Pedido> find(@PathVariable Integer id) {
-        Pedido obj = pedido.findById(id);
+    public ResponseEntity<Checklist> find(@PathVariable Integer id) {
+        Checklist obj = checklist.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Pedido> insert(@Valid @RequestBody Pedido obj, BindingResult br) {
+    public ResponseEntity<Checklist> insert(@Valid @RequestBody Checklist obj, BindingResult br) {
         if (br.hasErrors()) {
         	throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
 		}
-        obj = pedido.insert(obj);
+        obj = checklist.insert(obj);
         return ResponseEntity.ok().body(obj);
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Pedido> update(@Valid @RequestBody Pedido obj, BindingResult br) {
+    public ResponseEntity<Checklist> update(@Valid @RequestBody Checklist obj, BindingResult br) {
         if (br.hasErrors())
         	throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
-        obj = pedido.update(obj);
+        obj = checklist.update(obj);
         return ResponseEntity.ok().body(obj);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        pedido.delete(id);
+        checklist.delete(id);
         return ResponseEntity.noContent().build();
     }
-    
 
 }

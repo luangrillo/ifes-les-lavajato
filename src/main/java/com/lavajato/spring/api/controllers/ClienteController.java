@@ -1,14 +1,13 @@
 package com.lavajato.spring.api.controllers;
 
 
-
 import java.util.Collection;
 
 import javax.validation.Valid;
 
-import com.lavajato.spring.api.entity.Pedido;
+import com.lavajato.spring.api.entity.Cliente;
 import com.lavajato.spring.api.repository.exeptions.ConstraintException;
-import com.lavajato.spring.api.security.services.PedidoService;
+import com.lavajato.spring.api.security.services.ClienteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,46 +20,44 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value = "/pedido")
-public class PedidoController {
+@RequestMapping(value = "/cliente")
+public class ClienteController {
 
     @Autowired
-    private PedidoService pedido;
+    private ClienteService service;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Collection<Pedido>> findAll() {
-        Collection<Pedido> collection = pedido.findAll();
+    public ResponseEntity<Collection<Cliente>> findAll() {
+        Collection<Cliente> collection = service.findAll();
         return ResponseEntity.ok().body(collection);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Pedido> find(@PathVariable Integer id) {
-        Pedido obj = pedido.findById(id);
+    public ResponseEntity<Cliente> find(@PathVariable Integer id) {
+        Cliente obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Pedido> insert(@Valid @RequestBody Pedido obj, BindingResult br) {
-        if (br.hasErrors()) {
+    public ResponseEntity<Cliente> insert(@Valid @RequestBody Cliente obj, BindingResult br) {
+        if (br.hasErrors())
         	throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
-		}
-        obj = pedido.insert(obj);
+        obj = service.insert(obj);
         return ResponseEntity.ok().body(obj);
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Pedido> update(@Valid @RequestBody Pedido obj, BindingResult br) {
+    public ResponseEntity<Cliente> update(@Valid @RequestBody Cliente obj, BindingResult br) {
         if (br.hasErrors())
         	throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
-        obj = pedido.update(obj);
+        obj = service.update(obj);
         return ResponseEntity.ok().body(obj);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        pedido.delete(id);
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
-    
 
 }

@@ -62,6 +62,7 @@ public class Pedido {
 
     @NotBlank
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
 }

@@ -1,8 +1,10 @@
 package com.lavajato.spring.api.security.services;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.lavajato.spring.api.entity.Cidade;
+import com.lavajato.spring.api.entity.Uf;
 import com.lavajato.spring.api.repository.CidadeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +30,9 @@ public class CidadeService {
     }
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    public Collection<Cidade> findByUf(Uf uf) {
+        return repository.findByUf(uf);
     }
 }

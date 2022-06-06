@@ -29,5 +29,4 @@ public class ServicoService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
-
 }
