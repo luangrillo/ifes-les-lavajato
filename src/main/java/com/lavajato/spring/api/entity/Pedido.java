@@ -20,7 +20,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-
+import ch.qos.logback.core.net.server.Client;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -53,6 +53,11 @@ public class Pedido {
     @Size(max = 99999)
     private String observacoes;
 
+    @Column(name = "status")
+    @NotBlank
+    @Size(max = 99999)
+    private String status;
+
     @ManyToMany()
     @JoinTable(name = "pedido_servico", joinColumns = @JoinColumn(name = "pedido_id"), inverseJoinColumns = @JoinColumn(name = "servico_id"))
     Set<Servico> servico;
@@ -64,5 +69,10 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @NotBlank
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
 }
