@@ -5,7 +5,7 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import com.lavajato.spring.api.entity.Uf;
-import com.lavajato.spring.api.repository.exeptions.ConstraintException;
+import com.lavajato.spring.api.security.services.exceptions.ConstraintException;
 import com.lavajato.spring.api.security.services.UfService;
 
 import org.springframework.beans.factory.annotation.Autowired;

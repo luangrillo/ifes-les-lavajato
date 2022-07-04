@@ -8,7 +8,7 @@ import javax.validation.Valid;
 
 import com.lavajato.spring.api.entity.Cidade;
 import com.lavajato.spring.api.entity.Uf;
-import com.lavajato.spring.api.repository.exeptions.ConstraintException;
+import com.lavajato.spring.api.security.services.exceptions.ConstraintException;
 import com.lavajato.spring.api.security.services.CidadeService;
 
 import org.springframework.beans.factory.annotation.Autowired;

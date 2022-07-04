@@ -1,4 +1,4 @@
-package com.lavajato.spring.api.repository.exeptions;
+package com.lavajato.spring.api.security.services.exceptions;
 
 public class ConstraintException extends RuntimeException {
 

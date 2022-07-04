@@ -7,7 +7,7 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import com.lavajato.spring.api.entity.Endereco;
-import com.lavajato.spring.api.repository.exeptions.ConstraintException;
+import com.lavajato.spring.api.security.services.exceptions.ConstraintException;
 import com.lavajato.spring.api.security.services.EnderecoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
