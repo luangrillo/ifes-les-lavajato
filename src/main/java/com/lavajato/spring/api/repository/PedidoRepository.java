@@ -18,4 +18,5 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     @Transactional(readOnly = true)
     @Query(value = "SELECT * FROM public.pedido where cliente_id = ?1 and status = 'ABERTO'", nativeQuery = true)
     public  Collection<?> checkAgendamento(Integer client_id);
+
 }

@@ -56,6 +56,15 @@ public class PedidoController {
         return ResponseEntity.ok().body(obj);
     }
 
+    @RequestMapping(value = "/update_status/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Pedido> updateStatus(@Valid @RequestBody Pedido obj, BindingResult br) {
+        if (br.hasErrors())
+        	throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
+        obj = pedido.updateStatus(obj);
+        return ResponseEntity.ok().body(obj);
+    }
+
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         pedido.delete(id);
