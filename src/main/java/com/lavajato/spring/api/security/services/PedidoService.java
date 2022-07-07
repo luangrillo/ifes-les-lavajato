@@ -1,5 +1,7 @@
 package com.lavajato.spring.api.security.services;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,15 +29,33 @@ public class PedidoService {
         return repository.findAll();
     }
     public Pedido insert(Pedido pedido) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+        LocalDateTime data_fim = LocalDateTime.now();  
+
+        System.out.println(dtf.format(data_fim));
+        // Minus date two months from date_fim
+        LocalDateTime data_inicio = data_fim.minusMonths(2);
+        
         Collection<?> agendamento = repository.checkAgendamento(pedido.getCliente().getId());
 
-        // Cliente não pode efetuar mais que quatro agendamentos de serviços. 
+        Collection<?> pedidoDesconto = repository.checkDesconto(pedido.getCliente().getId(), data_inicio.toString(), data_fim.toString());
 
-        if (agendamento.size() > 4) {
+        // Cliente não pode efetuar mais que quatro agendamentos de serviços. 
+        
+
+        if (agendamento.size() > 4) { 
+            // Cliente não pode efetuar mais que quatro agendamentos de serviços.
             throw new ConstraintException("Cliente já possui quatro agendamentos aberto");
-        }else{
+        }else if (pedidoDesconto.size() > 4) {
+            // Desconto - o cliente tera um desconto de 20 reais em caso de efetuar quatro pedidos concluido em dois meses: 
+            pedido.setValorDesconto(20.0);
             return repository.save(pedido);
+        }else{
+            return repository.save(pedido); // Salva o pedido sem desconto
         }
+
+
+
     }
     public Pedido update(Pedido pedido) {
         return repository.save(pedido);

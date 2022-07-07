@@ -17,6 +17,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,12 +34,12 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
+
     @Column(length = 250, unique = true)
     @CPF
     private String cpf;
 
-    @NotBlank
+
     @Column(length = 250, unique = true)
     private String nome;
     
@@ -58,5 +60,17 @@ public class Cliente {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
+
+    @Builder
+    public Cliente(Integer id, String cpf, String nome, String telefone, String email, Set<Veiculo> veiculos, Set<Pedido> pedidos, Endereco endereco) {
+        this.id = id;
+        this.cpf = cpf;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.veiculos = veiculos;
+        this.pedidos = pedidos;
+        this.endereco = endereco;
+    }
     
 }

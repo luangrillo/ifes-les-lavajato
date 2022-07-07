@@ -20,7 +20,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import ch.qos.logback.core.net.server.Client;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -55,7 +55,6 @@ public class Pedido {
 
     @Column(name = "status")
     @NotBlank
-    @Size(max = 99999)
     private String status;
 
     @ManyToMany()
@@ -74,5 +73,19 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
+
+    @Builder
+    public Pedido(Integer id, Double valorAcrecimo, Double valorDesconto, Date dataInicio, String observacoes, String status, Set<Servico> servico, Checklist checklist, User user, Cliente cliente) {
+        this.id = id;
+        this.valorAcrecimo = valorAcrecimo;
+        this.valorDesconto = valorDesconto;
+        this.dataInicio = dataInicio;
+        this.observacoes = observacoes;
+        this.status = status;
+        this.servico = servico;
+        this.Checklist = checklist;
+        this.user = user;
+        this.cliente = cliente;
+    }
 
 }

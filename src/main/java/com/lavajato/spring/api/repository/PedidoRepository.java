@@ -1,5 +1,6 @@
 package com.lavajato.spring.api.repository;
 
+import java.sql.Date;
 import java.util.Collection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,5 +19,9 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     @Transactional(readOnly = true)
     @Query(value = "SELECT * FROM public.pedido where cliente_id = ?1 and status = 'ABERTO'", nativeQuery = true)
     public  Collection<?> checkAgendamento(Integer client_id);
+
+    @Transactional(readOnly = true)
+    @Query(value = "SELECT * FROM public.pedido WHERE cliente_id = ?1 and status = 'FECHADO' and  data_inicio BETWEEN '?2' AND '?3' ", nativeQuery = true)
+    public  Collection<?> checkDesconto(Integer client_id, String data_inicio, String data_fim);
 
 }

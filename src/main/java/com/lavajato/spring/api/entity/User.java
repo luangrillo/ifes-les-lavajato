@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +24,7 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotBlank
+
   @Size(max = 20)
   private String username;
 
@@ -32,11 +33,11 @@ public class User {
   @Email
   private String email;
 
-  @NotBlank
+
   @Size(min= 11, max = 11)
   private String phone;
 
-  @NotBlank
+
   @Size(max = 120)
   private String password;
 
@@ -46,5 +47,13 @@ public class User {
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Pedido> pedidos;
+
+  @Builder
+  public User(String username, String email, String phone, String password) {
+    this.username = username;
+    this.email = email;
+    this.phone = phone;
+    this.password = password;
+  }
 
 }
