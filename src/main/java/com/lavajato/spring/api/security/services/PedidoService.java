@@ -29,16 +29,16 @@ public class PedidoService {
         return repository.findAll();
     }
     public Pedido insert(Pedido pedido) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+        DateTimeFormatter data_formarto = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
         LocalDateTime data_fim = LocalDateTime.now();  
 
-        System.out.println(dtf.format(data_fim));
-        // Minus date two months from date_fim
         LocalDateTime data_inicio = data_fim.minusMonths(2);
         
         Collection<?> agendamento = repository.checkAgendamento(pedido.getCliente().getId());
 
-        Collection<?> pedidoDesconto = repository.checkDesconto(pedido.getCliente().getId(), data_inicio.toString(), data_fim.toString());
+        Collection<?> pedidoDesconto = repository.checkDesconto(pedido.getCliente().getId(), data_formarto.format(data_inicio).toString(), data_formarto.format(data_fim).toString());
+
+        Collection<?> pedidoCancelamento = repository.checkCancelamento(pedido.getCliente().getId(),data_formarto.format(data_inicio).toString(), data_formarto.format(data_fim).toString());
 
         // Cliente não pode efetuar mais que quatro agendamentos de serviços. 
         
@@ -46,8 +46,9 @@ public class PedidoService {
         if (agendamento.size() > 4) { 
             // Cliente não pode efetuar mais que quatro agendamentos de serviços.
             throw new ConstraintException("Cliente já possui quatro agendamentos aberto");
-        }else if (pedidoDesconto.size() > 4) {
-            // Desconto - o cliente tera um desconto de 20 reais em caso de efetuar quatro pedidos concluido em dois meses: 
+        }else if (pedidoDesconto.size() > 4 && pedidoCancelamento.size() == 0) {
+            // Desconto - o cliente tera um desconto de 20 reais em caso de efetuar quatro pedidos concluido em dois meses;
+            // Caso o cliente cancelou o pedido no período de 2 meses não poderá receber o desconto
             pedido.setValorDesconto(20.0);
             return repository.save(pedido);
         }else{
