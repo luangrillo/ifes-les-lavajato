@@ -27,7 +27,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Cliente {
     @Id
-    @ApiModelProperty(position = 1 , required = true, value = "Identificador do cliente", example = "1")
+    @ApiModelProperty(position = 1 , required = true, value = "Identificador do cliente", example = "0")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

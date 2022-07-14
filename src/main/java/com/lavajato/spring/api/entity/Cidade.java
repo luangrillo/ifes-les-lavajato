@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,10 +27,12 @@ public class Cidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @ApiModelProperty(position = 1 , required = true, value = "Identificador da cidade", example = "0")
     private Integer id;
 
     @NotBlank
     @Column(name = "nome")
+    @ApiModelProperty(position = 2 , required = true, value = "Nome da cidade", example = "São Paulo")
     private String nome;
 
     @NotBlank

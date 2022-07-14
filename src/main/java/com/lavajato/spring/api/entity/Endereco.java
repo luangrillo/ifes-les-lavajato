@@ -43,11 +43,14 @@ public class Endereco {
     @ApiModelProperty(position = 5 , required = false, value = "Cidade do endereço", example = "São Paulo")
     private String bairro;
 
+    @ApiModelProperty(position = 6 , required = false, value = "Estado do endereço", example = "SP")
     private String complemento;
 
+    @ApiModelProperty(position = 7 , required = false, value = "OBS", example = "Rua sem saida")
     private String observacoes;
 
     @ManyToOne
+    @ApiModelProperty(position = 8 , required = false, value = "Estado do endereço", example = "SP")
     private Cidade cidade;
 
     @OneToOne(mappedBy = "endereco")
