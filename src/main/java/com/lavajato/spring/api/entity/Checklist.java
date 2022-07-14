@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotBlank;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -69,5 +70,21 @@ public class Checklist {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pedido_id", referencedColumnName = "id")
     private Pedido pedido;
+
+    @Builder
+    public Checklist(Integer id, Date dataEntrada, Date dataSaida, Boolean lataria, Boolean pneu, Boolean vidro, Boolean quilometragem, Boolean faroisLanternas, Boolean interiro_veiculo, Boolean checklistEntrada, Boolean checklistSaida, Pedido pedido) {
+        this.id = id;
+        this.dataEntrada = dataEntrada;
+        this.dataSaida = dataSaida;
+        this.lataria = lataria;
+        this.pneu = pneu;
+        this.vidro = vidro;
+        this.quilometragem = quilometragem;
+        this.faroisLanternas = faroisLanternas;
+        this.interiro_veiculo = interiro_veiculo;
+        this.checklistEntrada = checklistEntrada;
+        this.checklistSaida = checklistSaida;
+        this.pedido = pedido;
+    }
 
 }

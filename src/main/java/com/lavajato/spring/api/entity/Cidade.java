@@ -14,10 +14,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "cidade")
+@NoArgsConstructor
 @Getter @Setter
 public class Cidade {
     
@@ -34,7 +36,7 @@ public class Cidade {
     @ManyToOne
     private Uf uf;
 
-    @OneToMany(mappedBy = "cidade", cascade = CascadeType.ALL)
-    private List<Endereco> enderecos;
+    // @OneToMany(mappedBy = "cidade", cascade = CascadeType.ALL)
+    // private List<Endereco> enderecos;
 
 }

@@ -1,6 +1,5 @@
 package com.lavajato.spring.api.entity;
 
-import java.util.Set;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;
@@ -10,16 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
-import org.hibernate.validator.constraints.br.CPF;
-
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -29,48 +24,42 @@ import lombok.Setter;
     @UniqueConstraint(columnNames = "email")
 })
 @Getter @Setter
+@NoArgsConstructor
 public class Cliente {
     @Id
+    @ApiModelProperty(position = 1 , required = true, value = "Identificador do cliente", example = "1")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
 
     @Column(length = 250, unique = true)
-    @CPF
+    @ApiModelProperty(position = 2 , required = true, value = "CPF do cliente", example = "12345678901")
     private String cpf;
 
 
     @Column(length = 250, unique = true)
+    @ApiModelProperty(position = 3 , required = true, value = "Nome do cliente", example = "João")
     private String nome;
     
     @Column(length = 250, unique = true)
+    @ApiModelProperty(position = 4 , required = true, value = "Telefone do cliente", example = "11999999999")
     private String telefone;
 
     @Column(length = 250, unique = true)
+    @ApiModelProperty(position = 5 , required = true, value = "Email do cliente", example = "teste@teste.com")
     private String email;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cliente_id")
-    private Set<Veiculo> veiculos;
+    // @OneToMany(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "cliente_id")
+    // private Set<Veiculo> veiculos;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cliente_id")
-    private Set<Pedido> pedidos;
+    // @OneToMany(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "cliente_id")
+    // private Set<Pedido> pedidos;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
 
-    @Builder
-    public Cliente(Integer id, String cpf, String nome, String telefone, String email, Set<Veiculo> veiculos, Set<Pedido> pedidos, Endereco endereco) {
-        this.id = id;
-        this.cpf = cpf;
-        this.nome = nome;
-        this.telefone = telefone;
-        this.email = email;
-        this.veiculos = veiculos;
-        this.pedidos = pedidos;
-        this.endereco = endereco;
-    }
     
 }

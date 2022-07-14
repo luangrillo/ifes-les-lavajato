@@ -12,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.validation.constraints.Max;
@@ -20,14 +19,15 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Entity
 @Table(name = "pedido")
 @Getter @Setter
+@NoArgsConstructor
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,8 +61,8 @@ public class Pedido {
     @JoinTable(name = "pedido_servico", joinColumns = @JoinColumn(name = "pedido_id"), inverseJoinColumns = @JoinColumn(name = "servico_id"))
     Set<Servico> servico;
 
-    @OneToOne(mappedBy = "pedido")
-    private Checklist Checklist;
+    // @OneToOne(mappedBy = "pedido")
+    // private Checklist Checklist;
 
     @NotBlank
     @ManyToOne
@@ -74,18 +74,5 @@ public class Pedido {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @Builder
-    public Pedido(Integer id, Double valorAcrecimo, Double valorDesconto, Date dataInicio, String observacoes, String status, Set<Servico> servico, Checklist checklist, User user, Cliente cliente) {
-        this.id = id;
-        this.valorAcrecimo = valorAcrecimo;
-        this.valorDesconto = valorDesconto;
-        this.dataInicio = dataInicio;
-        this.observacoes = observacoes;
-        this.status = status;
-        this.servico = servico;
-        this.Checklist = checklist;
-        this.user = user;
-        this.cliente = cliente;
-    }
 
 }

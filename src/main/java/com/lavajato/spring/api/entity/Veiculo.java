@@ -6,15 +6,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 
 @Entity
 @Table(name = "veiculo")
+@NoArgsConstructor
 @Getter @Setter
 public class Veiculo {
     @Id
@@ -32,5 +37,11 @@ public class Veiculo {
 
     @Column(length = 250)
     private String ano;
+
+    @NotBlank
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
     
 }

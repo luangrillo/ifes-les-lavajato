@@ -11,11 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "uf")
+@NoArgsConstructor
 @Getter @Setter
 public class Uf {
     
@@ -30,6 +33,7 @@ public class Uf {
     @Column(name = "nome")
     private String nome;
 
-    @OneToMany(mappedBy = "uf", cascade = CascadeType.ALL)
-    private List<Cidade> cidades;
+    // @OneToMany(mappedBy = "uf", cascade = CascadeType.ALL)
+    // private List<Cidade> cidades;
+
 }

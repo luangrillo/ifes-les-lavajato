@@ -63,7 +63,7 @@ public class PedidoService {
     }
 
     public Pedido updateStatus(Pedido pedido) {
-        Collection<?> checklist = ChecklistRepository.findChecklistsOk(pedido.getChecklist().getId());
+        Collection<?> checklist = ChecklistRepository.findChecklistsOk(pedido.getCliente().getId()); /// WARN: Não está funcionando
         
         // Encerramento do pedido mediante checklist do veículo.
 
