@@ -40,6 +40,7 @@ public class PedidoService {
         Collection<?> pedidoCancelamento = repository.checkCancelamento(pedido.getCliente().getId(), java.sql.Date.valueOf(data_inicio.toLocalDate()), java.sql.Date.valueOf(data_inicio.toLocalDate()));
 
         // Cliente não pode efetuar mais que quatro agendamentos de serviços. 
+
         
 
         if (agendamento.size() > 4) { 
@@ -53,6 +54,7 @@ public class PedidoService {
         }else{
             return repository.save(pedido); // Salva o pedido sem desconto
         }
+        
 
 
 
