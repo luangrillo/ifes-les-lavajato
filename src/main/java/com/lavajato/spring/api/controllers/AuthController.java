@@ -85,9 +85,9 @@ public class AuthController {
       return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
     }
 
-    // User user = new User(signUpRequest.getUsername(),
-    //                      signUpRequest.getEmail(),
-    //                      encoder.encode(signUpRequest.getPassword()));
+    User user = new User(signUpRequest.getUsername(),
+                          signUpRequest.getEmail(),
+                         encoder.encode(signUpRequest.getPassword()));
 
     Set<String> strRoles = signUpRequest.getRole();
     Set<Roles> roles = new HashSet<>();

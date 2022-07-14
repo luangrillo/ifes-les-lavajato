@@ -28,17 +28,16 @@ public class PedidoService {
     public List<Pedido> findAll() {
         return repository.findAll();
     }
-    public Pedido insert(Pedido pedido) {
-        DateTimeFormatter data_formarto = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+    public Pedido insert(Pedido pedido) { 
         LocalDateTime data_fim = LocalDateTime.now();  
 
         LocalDateTime data_inicio = data_fim.minusMonths(2);
         
         Collection<?> agendamento = repository.checkAgendamento(pedido.getCliente().getId());
 
-        Collection<?> pedidoDesconto = repository.checkDesconto(pedido.getCliente().getId(), data_formarto.format(data_inicio).toString(), data_formarto.format(data_fim).toString());
+        Collection<?> pedidoDesconto = repository.checkDesconto(pedido.getCliente().getId(), java.sql.Date.valueOf(data_inicio.toLocalDate()), java.sql.Date.valueOf(data_inicio.toLocalDate()));
 
-        Collection<?> pedidoCancelamento = repository.checkCancelamento(pedido.getCliente().getId(),data_formarto.format(data_inicio).toString(), data_formarto.format(data_fim).toString());
+        Collection<?> pedidoCancelamento = repository.checkCancelamento(pedido.getCliente().getId(), java.sql.Date.valueOf(data_inicio.toLocalDate()), java.sql.Date.valueOf(data_inicio.toLocalDate()));
 
         // Cliente não pode efetuar mais que quatro agendamentos de serviços. 
         

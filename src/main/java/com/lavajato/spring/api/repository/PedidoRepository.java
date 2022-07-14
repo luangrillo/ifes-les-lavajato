@@ -21,10 +21,10 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     public  Collection<?> checkAgendamento(Integer client_id);
 
     @Transactional(readOnly = true)
-    @Query(value = "SELECT * FROM public.pedido WHERE cliente_id = ?1 and status = 'FECHADO' and  data_inicio BETWEEN '?2' AND '?3' ", nativeQuery = true)
-    public  Collection<?> checkDesconto(Integer client_id, String data_inicio, String data_fim);
+    @Query(value = "SELECT * FROM public.pedido WHERE cliente_id = ?1 and status = 'FECHADO' and  data_inicio BETWEEN ?2 AND ?3 ", nativeQuery = true)
+    public  Collection<?> checkDesconto(Integer client_id, java.sql.Date data_inicio, java.sql.Date data_fim);
 
     @Transactional(readOnly = true)
-    @Query(value = "SELECT * FROM public.pedido WHERE cliente_id = ?1 and status = 'CANCELADO' and  data_inicio BETWEEN '?2' AND '?3' ", nativeQuery = true)
-    public  Collection<?> checkCancelamento(Integer client_id, String data_inicio, String data_fim);
+    @Query(value = "SELECT * FROM public.pedido WHERE cliente_id = ?1 and status = 'CANCELADO' and  data_inicio BETWEEN ?2 AND ?3 ", nativeQuery = true)
+    public  Collection<?> checkCancelamento(Integer client_id, java.sql.Date data_inicio, java.sql.Date data_fim);
 }
