@@ -1,7 +1,6 @@
 package com.lavajato.spring.api.entity;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -10,8 +9,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -19,7 +18,6 @@ import lombok.Setter;
     @UniqueConstraint(columnNames = "username"),
     @UniqueConstraint(columnNames = "email")
 })
-@NoArgsConstructor
 @Getter @Setter
 public class User {
   @Id
@@ -39,10 +37,6 @@ public class User {
   private String email;
 
 
-  @Size(min= 11, max = 11)
-  @ApiModelProperty(position = 4 , required = true, value = "Telefone do usuário", example = "11999999999")
-  private String phone;
-
 
   @Size(max = 120)
   @ApiModelProperty(position = 5 , required = true, value = "Senha do usuário", example = "1234")
@@ -56,5 +50,11 @@ public class User {
   // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   // private List<Pedido> pedidos;
 
+  @Builder
+  public User(String username, String email, String password) {
+      this.username = username;
+      this.email = email;
+      this.password = password;
+    }
 
 }

@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import com.lavajato.spring.api.entity.EnumerateRoles;
 import com.lavajato.spring.api.entity.Roles;
+import com.lavajato.spring.api.entity.User;
 import com.lavajato.spring.api.payload.request.LoginRequest;
 import com.lavajato.spring.api.payload.request.SignupRequest;
 import com.lavajato.spring.api.payload.response.MessageResponse;
@@ -86,7 +87,7 @@ public class AuthController {
     }
 
     User user = new User(signUpRequest.getUsername(),
-                          signUpRequest.getEmail(),
+                         signUpRequest.getEmail(),
                          encoder.encode(signUpRequest.getPassword()));
 
     Set<String> strRoles = signUpRequest.getRole();
@@ -119,8 +120,8 @@ public class AuthController {
       });
     }
 
-    // user.setRoles(roles);
-    // userRepository.save(user);
+    user.setRoles(roles);
+    userRepository.save(user);
 
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }
