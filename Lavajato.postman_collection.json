@@ -1,0 +1,363 @@
+{
+	"info": {
+		"_postman_id": "9aca0add-3eba-4d1b-b8b7-59e3e6e271b8",
+		"name": "Lavajato",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"testeusr@teste.com\",\r\n  \"password\": \"testeusr@teste.com\",\r\n  \"role\": [\r\n  ],\r\n  \"username\": \"testeusr\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/auth/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get authorization",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"password\": \"testeusr@teste.com\",\r\n  \"username\": \"testeusr\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/auth/signin",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add uf",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sigla\": \"SP\",\r\n  \"nome\": \"São Paulo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/uf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"uf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add cidade",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"uf\": {\r\n    \"id\": 1\r\n  },\r\n  \"nome\": \"São Paulo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/cidade",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cidade"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"endereco\": {\r\n    \"rua\": \"Rua dos Bobos\",\r\n    \"cep\": 12345678,\r\n    \"numero\": \"Centro\",\r\n    \"bairro\": \"São Paulo\",\r\n    \"complemento\": \"SP\",\r\n    \"observacoes\": \"Rua sem saida\",\r\n    \"cidade\": {\r\n      \"id\": 1\r\n    }\r\n  },\r\n  \"id\": 0,\r\n  \"cpf\": 12345678901,\r\n  \"nome\": \"João\",\r\n  \"telefone\": 11999999999,\r\n  \"email\": \"teste@teste.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/cliente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all clients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cliente",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get client",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/cliente/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cliente",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add servico",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"nome\": \"Lavagem\",\r\n  \"valor\": 100,\r\n  \"descricao\": \"Lavagem de carro\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/servico",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"servico"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Servicos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/servico",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"servico"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add pedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"servico\": [\r\n    {\r\n      \"id\": 1\r\n    }\r\n  ],\r\n  \"id\": 0,\r\n  \"valorAcrecimo\": 0,\r\n  \"valorDesconto\": 0,\r\n  \"dataInicio\": \"2020-01-01\",\r\n  \"observacoes\": \"Lavagem de carro\",\r\n  \"status\": \"ABERTO\",\r\n  \"user\": {\r\n    \"id\": 1\r\n  },\r\n  \"cliente\": {\r\n    \"id\": 1\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/pedido",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pedido"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Relatorio cliente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/relatorio/clientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"relatorio",
+						"clientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Relatorio usuarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/relatorio/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"relatorio",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Relatorio Veiculos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/relatorio/veiculos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"relatorio",
+						"veiculos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Relatorio veiculos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/relatorio/servicos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"relatorio",
+						"servicos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Relatorio Faturamento",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/relatorio/faturamento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"relatorio",
+						"faturamento"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

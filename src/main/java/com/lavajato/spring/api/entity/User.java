@@ -8,6 +8,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,7 +43,7 @@ public class User {
 
 
   @Size(max = 120)
-  @ApiModelProperty(position = 5 , required = true, value = "Senha do usuário", example = "1234")
+  @JsonIgnore
   private String password;
 
   @ManyToMany(fetch = FetchType.LAZY)
