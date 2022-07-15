@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -18,6 +19,7 @@ import lombok.Setter;
     @UniqueConstraint(columnNames = "username"),
     @UniqueConstraint(columnNames = "email")
 })
+@NoArgsConstructor
 @Getter @Setter
 public class User {
   @Id
@@ -57,8 +59,4 @@ public class User {
       this.password = password;
     }
   
-    public User(){
-      
-    }
-
 }
