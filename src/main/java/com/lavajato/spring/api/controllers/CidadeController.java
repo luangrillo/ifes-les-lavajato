@@ -37,10 +37,6 @@ public class CidadeController {
         return ResponseEntity.ok().body(obj);
     }
 
-
-
-
-    
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Cidade> insert(@Valid @RequestBody Cidade obj, BindingResult br) {
         if (br.hasErrors()) {
