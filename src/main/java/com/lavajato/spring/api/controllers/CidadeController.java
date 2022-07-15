@@ -1,7 +1,5 @@
 package com.lavajato.spring.api.controllers;
 
-
-
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 
 @RestController
 @RequestMapping(value = "/cidade")
@@ -40,6 +37,10 @@ public class CidadeController {
         return ResponseEntity.ok().body(obj);
     }
 
+
+
+
+    
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Cidade> insert(@Valid @RequestBody Cidade obj, BindingResult br) {
         if (br.hasErrors()) {
