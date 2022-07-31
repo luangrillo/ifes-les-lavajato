@@ -11,12 +11,14 @@ import com.lavajato.spring.api.security.services.ServicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/servico")
 public class ServicoController {
@@ -33,7 +35,7 @@ public class ServicoController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Servico> find(@PathVariable Integer id) {
+    public ResponseEntity<Servico> find(@PathVariable Long id) {
         Servico obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
@@ -46,6 +48,14 @@ public class ServicoController {
         return ResponseEntity.ok().body(obj);
     }
     
+    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
+    public ResponseEntity<Servico> saveManager(@Valid @RequestBody Servico obj, BindingResult br) {
+        if (br.hasErrors())
+        	throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
+        obj = service.update(obj);
+        return ResponseEntity.ok().body(obj);
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Servico> update(@Valid @RequestBody Servico obj, BindingResult br) {
     	if (br.hasErrors())

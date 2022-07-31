@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +27,7 @@ public class Checklist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @NotBlank(message = "O campo data_entrada é obrigatório")
     @Column(name = "data_entrada")
@@ -72,7 +74,7 @@ public class Checklist {
     private Pedido pedido;
 
     @Builder
-    public Checklist(Integer id, Date dataEntrada, Date dataSaida, Boolean lataria, Boolean pneu, Boolean vidro, Boolean quilometragem, Boolean faroisLanternas, Boolean interiro_veiculo, Boolean checklistEntrada, Boolean checklistSaida, Pedido pedido) {
+    public Checklist(Long id, Date dataEntrada, Date dataSaida, Boolean lataria, Boolean pneu, Boolean vidro, Boolean quilometragem, Boolean faroisLanternas, Boolean interiro_veiculo, Boolean checklistEntrada, Boolean checklistSaida, Pedido pedido) {
         this.id = id;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;

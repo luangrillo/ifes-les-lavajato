@@ -14,7 +14,7 @@ public class EnderecoService {
     @Autowired
     private EnderecoRepository repository;
 
-    public Endereco findById(Integer id) {
+    public Endereco findById(Long id) {
         return repository.findById(id).get();
     }
     public List<Endereco> findAll() {

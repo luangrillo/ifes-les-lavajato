@@ -29,7 +29,7 @@ public class Cliente {
     @Id
     @ApiModelProperty(position = 1 , required = true, value = "Identificador do cliente", example = "0")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
 
     @Column(length = 250, unique = true)

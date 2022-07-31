@@ -1,7 +1,6 @@
 package com.lavajato.spring.api.security.services;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class PedidoService {
     @Autowired
     private ChecklistRepository ChecklistRepository;
 
-    public Pedido findById(Integer id) {
+    public Pedido findById(Long id) {
         return repository.findById(id).get();
     }
     public List<Pedido> findAll() {
@@ -54,11 +53,8 @@ public class PedidoService {
         }else{
             return repository.save(pedido); // Salva o pedido sem desconto
         }
-        
-
-
-
     }
+    
     public Pedido update(Pedido pedido) {
         return repository.save(pedido);
     }

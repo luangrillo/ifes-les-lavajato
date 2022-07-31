@@ -11,13 +11,14 @@ import com.lavajato.spring.api.security.services.ChecklistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/checklist")
 public class ChecklistController {
@@ -32,7 +33,7 @@ public class ChecklistController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Checklist> find(@PathVariable Integer id) {
+    public ResponseEntity<Checklist> find(@PathVariable Long id) {
         Checklist obj = checklist.findById(id);
         return ResponseEntity.ok().body(obj);
     }

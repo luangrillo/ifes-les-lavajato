@@ -22,32 +22,31 @@ import lombok.Setter;
     @UniqueConstraint(columnNames = "email")
 })
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @ApiModelProperty(position = 1 , required = true, value = "Identificador do usuário", example = "0")
+  @ApiModelProperty(position = 1, required = true, value = "Identificador do usuário", example = "0")
   private Long id;
 
   @NotBlank
   @Size(max = 20)
-  @ApiModelProperty(position = 2 , required = true, value = "Nome do usuário", example = "Lavajato")
+  @ApiModelProperty(position = 2, required = true, value = "Nome do usuário", example = "Lavajato")
   private String username;
 
   @NotBlank
   @Size(max = 50)
   @Email
-  @ApiModelProperty(position = 3 , required = true, value = "Email do usuário", example = "teste@teste.com")
+  @ApiModelProperty(position = 3, required = true, value = "Email do usuário", example = "teste@teste.com")
   private String email;
-
-
 
   @Size(max = 120)
   @JsonIgnore
   private String password;
 
   @ManyToMany(fetch = FetchType.LAZY)
-  @ApiModelProperty(position = 6 , required = true, value = "Permissões do usuário", example = "ROLE_FUNCIONARIO")
+  @ApiModelProperty(position = 6, required = true, value = "Permissões do usuário", example = "ROLE_FUNCIONARIO")
   @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Roles> roles = new HashSet<>();
 
@@ -56,9 +55,10 @@ public class User {
 
   @Builder
   public User(String username, String email, String password) {
-      this.username = username;
-      this.email = email;
-      this.password = password;
-    }
-  
+    this.username = username;
+    this.email = email;
+    this.password = password;
+  }
+
+
 }
