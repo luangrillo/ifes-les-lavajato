@@ -26,7 +26,7 @@ public class Veiculo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(position = 1 , required = true, value = "Identificador do veículo", example = "0")
-    private Integer id;
+    private Long id;
 
     @Column(length = 250, unique = true)
     @ApiModelProperty(position = 2 , required = true, value = "Placa do veículo", example = "ABC-1234")
@@ -40,7 +40,7 @@ public class Veiculo {
     @ApiModelProperty(position = 4 , required = true, value = "Marca do veículo", example = "Volkswagen")
     private String cor;
 
-    @Column(length = 250)
+    @Column(length = 4)
     @ApiModelProperty(position = 5 , required = true, value = "Ano do veículo", example = "1979")
     private String ano;
 

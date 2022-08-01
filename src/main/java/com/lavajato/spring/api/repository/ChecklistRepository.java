@@ -12,11 +12,11 @@ import com.lavajato.spring.api.entity.Checklist;
 
 @Repository
 public interface ChecklistRepository extends JpaRepository<Checklist, Long> {
-    Optional<Checklist> findById(Integer id);
+    Optional<Checklist> findById(Long id);
 
     Boolean existsById(Integer id);
 
     @Transactional(readOnly = true)
     @Query(value = "SELECT * FROM public.checklist where id = ?1 and checklist_entrada = TRUE and checklist_saida = TRUE", nativeQuery = true)
-    public  Collection<?> findChecklistsOk(Integer checklist_id);
+    public  Collection<?> findChecklistsOk(Long checklist_id);
 }

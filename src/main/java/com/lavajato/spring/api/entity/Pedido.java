@@ -20,11 +20,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @Entity
 @Table(name = "pedido")
@@ -35,7 +35,7 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @ApiModelProperty(position = 1 , required = true, value = "Identificador do pedido", example = "0")
-    private Integer id;   
+    private Long id;   
 
     @Column(name = "valor_acrecimo")
     @Min(0)
@@ -55,7 +55,7 @@ public class Pedido {
     private Date dataInicio;
 
     @Column(name = "obs")
-    @NotBlank
+    // @NotBlank
     @Size(max = 99999)
     @ApiModelProperty(position = 5 , required = true, value = "Observação do pedido", example = "Lavagem de carro")
     private String observacoes;
@@ -69,7 +69,6 @@ public class Pedido {
     @JoinTable(name = "pedido_servico", joinColumns = @JoinColumn(name = "pedido_id"), inverseJoinColumns = @JoinColumn(name = "servico_id"))
     Set<Servico> servico;
 
-
     @NotBlank
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -81,6 +80,4 @@ public class Pedido {
     @JoinColumn(name = "cliente_id")
     @ApiModelProperty(position = 8 , required = true, value = "Identificador do cliente", example = "1")
     private Cliente cliente;
-
-
 }

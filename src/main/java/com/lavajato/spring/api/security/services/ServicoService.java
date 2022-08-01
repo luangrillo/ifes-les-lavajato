@@ -14,7 +14,7 @@ public class ServicoService {
     @Autowired
     private ServicoRepository repository;
 
-    public Servico findById(Integer id) {
+    public Servico findById(Long id) {
         return repository.findById(id).get();
     }
     public List<Servico> findAll() {

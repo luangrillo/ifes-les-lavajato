@@ -1,20 +1,17 @@
 package com.lavajato.spring.api.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,7 +26,7 @@ public class Cidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @ApiModelProperty(position = 1 , required = true, value = "Identificador da cidade", example = "0")
-    private Integer id;
+    private Long id;
 
     @NotBlank
     @Column(name = "nome")
@@ -37,8 +34,10 @@ public class Cidade {
     private String nome;
 
     @NotBlank
-    @ManyToOne
+    @ManyToOne()
     private Uf uf;
+
+
 
     // @OneToMany(mappedBy = "cidade", cascade = CascadeType.ALL)
     // private List<Endereco> enderecos;

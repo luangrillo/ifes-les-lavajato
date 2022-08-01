@@ -14,7 +14,7 @@ public class ChecklistService {
     @Autowired
     private ChecklistRepository repository;
 
-    public Checklist findById(Integer id) {
+    public Checklist findById(Long id) {
         return repository.findById(id).get();
     }
     public List<Checklist> findAll() {

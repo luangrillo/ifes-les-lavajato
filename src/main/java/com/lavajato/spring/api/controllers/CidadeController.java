@@ -12,12 +12,14 @@ import com.lavajato.spring.api.security.services.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/cidade")
 public class CidadeController {
@@ -32,7 +34,7 @@ public class CidadeController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Cidade> find(@PathVariable Integer id) {
+    public ResponseEntity<Cidade> find(@PathVariable Long id) {
         Cidade obj = cidade.findById(id);
         return ResponseEntity.ok().body(obj);
     }
@@ -54,6 +56,14 @@ public class CidadeController {
         return ResponseEntity.ok().body(obj);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
+    public ResponseEntity<Cidade> saveManager(@Valid @RequestBody Cidade obj, BindingResult br) {
+        if (br.hasErrors())
+        	throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
+        obj = cidade.update(obj);
+        return ResponseEntity.ok().body(obj);
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         cidade.delete(id);
@@ -61,7 +71,7 @@ public class CidadeController {
     }
     
     @RequestMapping(value="/findByUf/{idUf}", method=RequestMethod.GET)
-	public ResponseEntity<Collection<Cidade>> findByUf(@PathVariable Integer idUf) {
+	public ResponseEntity<Collection<Cidade>> findByUf(@PathVariable Long idUf) {
 		Uf obj = new Uf();
 		obj.setId(idUf);
 		Collection<Cidade> collection = cidade.findByUf(obj);

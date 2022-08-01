@@ -11,12 +11,14 @@ import com.lavajato.spring.api.security.services.VeiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/veiculo")
 public class VeiculoController {
@@ -41,6 +43,14 @@ public class VeiculoController {
         if (br.hasErrors())
         	throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
         obj = veiculo.insert(obj);
+        return ResponseEntity.ok().body(obj);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
+    public ResponseEntity<Veiculo> saveManager(@Valid @RequestBody Veiculo obj, BindingResult br) {
+        if (br.hasErrors())
+            throw new ConstraintException(br.getAllErrors().get(0).getDefaultMessage());
+        obj = veiculo.update(obj);
         return ResponseEntity.ok().body(obj);
     }
     

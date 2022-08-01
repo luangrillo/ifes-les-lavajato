@@ -1,5 +1,6 @@
 package com.lavajato.spring.api.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -22,7 +25,7 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(position = 1 , required = true, value = "Identificador do endereço", example = "1")
-    private Integer id;
+    private Long id;
 
 
     @Size(max = 256)
@@ -30,7 +33,7 @@ public class Endereco {
     private String rua;
 
 
-    @Size(min=8, max = 8)
+    @Size(min=9, max = 9)
     @ApiModelProperty(position = 3 , required = false, value = "Número do endereço", example = "12345678")
     private String cep;
 
@@ -53,7 +56,8 @@ public class Endereco {
     @ApiModelProperty(position = 8 , required = false, value = "Estado do endereço", example = "SP")
     private Cidade cidade;
 
-    @OneToOne(mappedBy = "endereco")
+    @JsonIgnore
+    @OneToOne(mappedBy = "endereco", cascade = CascadeType.ALL)
     private Cliente cliente;
 
 }

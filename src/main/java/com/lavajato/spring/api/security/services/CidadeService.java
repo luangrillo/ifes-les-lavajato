@@ -16,7 +16,7 @@ public class CidadeService {
     @Autowired
     private CidadeRepository repository;
 
-    public Cidade findById(Integer id) {
+    public Cidade findById(Long id) {
         return repository.findById(id).get();
     }
     public List<Cidade> findAll() {

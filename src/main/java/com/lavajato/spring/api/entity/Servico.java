@@ -23,7 +23,7 @@ public class Servico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @ApiModelProperty(position = 1 , required = true, value = "Identificador do serviço", example = "0")
-    private Integer id;   
+    private Long id;   
 
     @NotBlank
     @Column(name = "nome")
