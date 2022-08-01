@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = {"https://lavajatofrontend.herokuapp.com"}, maxAge = 3600)
 @RestController
 @RequestMapping(value = "/checklist")
 public class ChecklistController {
